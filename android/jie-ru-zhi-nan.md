@@ -49,7 +49,7 @@ dependencies {
 ```
 buildscript {
     dependencies {
-        classpath 'com.cosmos.rifle:plugin:1.3.6'
+        classpath 'com.cosmos.rifle:plugin:1.3.8'
     }
 }
 ```
@@ -63,7 +63,6 @@ rifleConfig {
     appId = "4af037b83e77345j3443io5d8d67395"          // 管理后台申请的应用APPID
     appKey = "e843359357823432hkj37b715e68cf6"         // 管理后台申请的应用APPKEY
     versionName = android.defaultConfig.versionName     // 当前应用的版本名称
-    // enable = true                      // 打开/关闭插件（默认为true）
 }
 ```
 
@@ -88,6 +87,7 @@ RadarConfig.Builder builder =
 Radar.with(builder.build());
 ```
 
+## 更多功能
 目前Radar内部在记录卡顿等信息时，需要获取页面（Activity）的名称，默认获取方式为获取页面的类名。
 改方式的缺点是，如果业务有部分web页面，Activity都是同一个类，但是内容（URL）不一样，需要重写页面名称获取方式
 
