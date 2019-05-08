@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cosmos.radar.sdk">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <application
+        android:name=".RadarApplication"
+        android:allowBackup="true"
+        android:label="RadarSDK"
+        android:supportsRtl="true">
+        <activity android:name=".TestFragmentAct">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".TestMemoLeakActivity" />
+        <activity android:name=".TestMemoLeakActivity2" />
+        <activity android:name=".TestMemoryAlertActivity" />
+        <activity android:name=".TestLagActivity" />
+        <activity android:name=".TestPageSpeedActivity" />
+    </application>
+
+</manifest>

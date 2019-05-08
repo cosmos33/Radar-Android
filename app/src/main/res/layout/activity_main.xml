@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"/>
+
+    <Button
+        android:id="@+id/click_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="启动界面，测试慢交互" />
+
+    <Button
+        android:id="@+id/click_btn2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="主线程休眠6S，测试ANR(超过5S)" />
+
+    <Button
+        android:id="@+id/click_btn3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="静态引用泄露" />
+
+    <Button
+        android:id="@+id/click_btn4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="异步任务泄露" />
+
+    <Button
+        android:id="@+id/click_btn_memory_alert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="测试内存预警" />
+
+    <Button
+        android:id="@+id/click_btn_test_lag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="测试卡顿" />
+
+
+</LinearLayout>

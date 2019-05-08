@@ -1,0 +1,66 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.cosmos.radar.sdk"
+        minSdkVersion 17
+        targetSdkVersion 28
+
+        versionCode 1
+        versionName "1.0"
+
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11"
+            }
+        }
+
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('123456')
+            storePassword "123456"
+            keyAlias "123456"
+            keyPassword "123456"
+            v2SigningEnabled true   // android 5.0-8.0，必须用V2，否则会有安全问题
+            v1SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            //对齐
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+}
+
+dependencies {
+    implementation "com.cosmos.radar:core:1.0.2"
+    implementation "com.cosmos.radar:lag:1.0.2"
+    implementation "com.cosmos.radar:memory:1.0.2"
+    implementation "com.cosmos.radar:pagespeed:1.0.2"
+}
+
+apply plugin: 'rifle.plugin'
+rifleConfig {
+    appId = "e2670a2e4b44b76adc262e51fc22b8d2"
+    appKey = "cedbf4779e07e1e367294dbe0f086501"
+    versionName = android.defaultConfig.versionName
+}
