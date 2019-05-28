@@ -17,12 +17,13 @@ Radar支持[JCenter仓库](http://jcenter.bintray.com/com/cosmos/rifle/)
 其中`core`为基础模块，必须引入，其他模块根据业务需要进行引入。
 
 ### 集成依赖
+def radarVersion = "1.1.1"
 ```
 dependencies {
-    compile 'com.cosmos.radar:core:1.0.2'
-    compile 'com.cosmos.radar:lag:1.0.2'
-    compile 'com.cosmos.radar:memory:1.0.2'
-    compile 'com.cosmos.radar:pagespeed:1.0.2'
+    implementation "com.cosmos.radar:core:$radarVersion"
+    implementation "com.cosmos.radar:lag:$radarVersion"
+    implementation "com.cosmos.radar:memory:$radarVersion"
+    implementation "com.cosmos.radar:pagespeed:$radarVersion"
 }
 ```
 
@@ -86,6 +87,22 @@ RadarConfig.Builder builder =
                 );
 Radar.with(builder.build());
 ```
+
+## 更新用户ID
+程序运行期间，如果用户ID更换之后，可以通过API进行更新
+
+```
+Radar.setUserId("23748");
+```
+
+## 添加自定义属性
+
+为了方便排查问题，可以通过添加自定义属性，添加的属性将会被带到后台，方便查看。
+
+```
+Radar.putUserKeyValue("diyAttribute", "ssss");
+```
+
 
 ## 更多功能
 目前Radar内部在记录卡顿等信息时，需要获取页面（Activity）的名称，默认获取方式为获取页面的类名。

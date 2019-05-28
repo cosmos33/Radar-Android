@@ -51,11 +51,12 @@ android {
 
 }
 
+def radarVersion = "1.1.1"
 dependencies {
-    implementation "com.cosmos.radar:core:1.0.2"
-    implementation "com.cosmos.radar:lag:1.0.2"
-    implementation "com.cosmos.radar:memory:1.0.2"
-    implementation "com.cosmos.radar:pagespeed:1.0.2"
+    implementation "com.cosmos.radar:core:$radarVersion"
+    implementation "com.cosmos.radar:lag:$radarVersion"
+    implementation "com.cosmos.radar:memory:$radarVersion"
+    implementation "com.cosmos.radar:pagespeed:$radarVersion"
 }
 
 apply plugin: 'rifle.plugin'
