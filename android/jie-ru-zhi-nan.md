@@ -17,8 +17,8 @@ Radar支持[JCenter仓库](http://jcenter.bintray.com/com/cosmos/rifle/)
 其中`core`为基础模块，必须引入，其他模块根据业务需要进行引入。
 
 ### 集成依赖
-def radarVersion = "1.1.1"
 ```
+def radarVersion = "1.1.1"
 dependencies {
     implementation "com.cosmos.radar:core:$radarVersion"
     implementation "com.cosmos.radar:lag:$radarVersion"
