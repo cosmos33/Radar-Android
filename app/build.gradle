@@ -51,7 +51,7 @@ android {
 
 }
 
-def radarVersion = "1.1.1"
+def radarVersion = "1.2.4"
 dependencies {
     implementation "com.cosmos.radar:core:$radarVersion"
     implementation "com.cosmos.radar:lag:$radarVersion"
