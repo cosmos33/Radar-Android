@@ -165,3 +165,18 @@ Radar.putUserKeyValue("diyAttribute", "ssss");
     })
 ```
 
+### 线上空实现
+因为`Radar` SDK 对包大小有一定的影响，如果业务在部分渠道不希望将其带上，可以通过gradle引用空库，而不需要修改代码的方式来减少对包大小的影响：
+
+```
+def radarVersion = "1.2.9"
+def isOpenRadar = true;             // 针对不同的打包方式，修改该变量
+if (isOpenRadar) {
+    implementation "com.cosmos.radar:core:$radarVersion"
+    implementation "com.cosmos.radar:lag:$radarVersion"
+    implementation "com.cosmos.radar:memory:$radarVersion"
+    implementation "com.cosmos.radar:pagespeed:$radarVersion"
+} else {
+    implementation "com.cosmos.radar:empty:$radarVersion"
+}
+```
