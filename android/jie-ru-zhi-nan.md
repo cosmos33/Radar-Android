@@ -18,7 +18,7 @@ Radar支持[JCenter仓库](http://jcenter.bintray.com/com/cosmos/rifle/)
 
 ### 集成依赖
 ```
-def radarVersion = "1.1.1"
+def radarVersion = "1.2.9"
 dependencies {
     implementation "com.cosmos.radar:core:$radarVersion"
     implementation "com.cosmos.radar:lag:$radarVersion"
@@ -42,7 +42,7 @@ dependencies {
 ```
 
 ## 集成Gradle插件
-如果应用有经过`proguard`混淆，为了方便查看后台收集到的堆栈信息，需要配置插件来提交`mapping`文件以及带带符号表的SO文件。插件将会在打Release包的时候（assembleRelease任务执行时）提交mapping文件以。
+如果应用有经过`proguard`混淆，为了方便查看堆栈信息，需要配置插件来提交`mapping`文件
 
 #### 添加插件依赖
 在Project的build.gradle下面添加编译期依赖：
@@ -50,7 +50,7 @@ dependencies {
 ```
 buildscript {
     dependencies {
-        classpath 'com.cosmos.rifle:plugin:1.3.8'
+        classpath 'com.cosmos.rifle:plugin:1.4.0'
     }
 }
 ```
@@ -74,11 +74,11 @@ rifleConfig {
 ```
 RadarConfig.Builder builder =
         new RadarConfig.Builder(this, "后台申请的APPID")
-                .debuggable(true)           // 设置成true会输出日志到logcat
-                .userId(null)
-                .appVersionName("1.0.0_radar_sdk")
-                .appVersionCode(10000)
-                .channel("debug")
+                .debuggable(true)                       // 设置成true会输出日志到logcat
+                .userId("12345")                        // 方便问题追踪
+                .appVersionName("1.0.0_radar_sdk")      // ！！！可选项
+                .appVersionCode(10000)                  // ！！！可选项
+                .channel("debug")                       // ！！！可选项
                 .kits(
                         new RadarLagKit(),              // 卡顿
                         new RadarPageTimeKit(),         // 页面启动时间
@@ -105,8 +105,9 @@ Radar.putUserKeyValue("diyAttribute", "ssss");
 
 
 ## 更多功能
-目前Radar内部在记录卡顿等信息时，需要获取页面（Activity）的名称，默认获取方式为获取页面的类名。
-改方式的缺点是，如果业务有部分web页面，Activity都是同一个类，但是内容（URL）不一样，需要重写页面名称获取方式
+### 修改页面名称获取方式
+目前Radar内部在记录，需要获取页面（Activity）的名称，默认获取方式为获取页面的类名。
+该方式的缺点是，如果业务有部分web页面，Activity都是同一个类，但是内容（URL）不一样，需要重写页面名称获取方式
 
 通过`RadarConfig.Builder`进行设置
 ```
@@ -119,5 +120,48 @@ Radar.putUserKeyValue("diyAttribute", "ssss");
         return null;
     }
 })
+```
+
+### Debug包默认开启
+如果希望在debug包时默认打开`Radar`，可以通过`RadarConfig.Builder`进行设置
+```
+.openWhileDebug(true)
+```
+
+### 修改Log输出实现
+如果希望修改log打印是的tag等功能，可以通过
+```
+.logImpl(
+    new ILog() {
+        @Override
+        public void v(String tag, String msg) {
+            Log.v("Radar-SDK", msg);
+        }
+
+        @Override
+        public void d(String tag, String msg) {
+            Log.d("Radar-SDK", msg);
+        }
+
+        @Override
+        public void i(String tag, String msg) {
+            Log.i("Radar-SDK", msg);
+        }
+
+        @Override
+        public void w(String tag, String msg) {
+            Log.w("Radar-SDK", msg);
+        }
+
+        @Override
+        public void e(String tag, String msg) {
+            Log.e("Radar-SDK", msg);
+        }
+
+        @Override
+        public void printError(String tag, Throwable throwable) {
+            Log.e("Radar-SDK", Log.getStackTraceString(throwable));
+        }
+    })
 ```
 
