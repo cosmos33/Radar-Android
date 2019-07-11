@@ -18,7 +18,7 @@ Radar支持[JCenter仓库](http://jcenter.bintray.com/com/cosmos/rifle/)
 
 ### 集成依赖
 ```
-def radarVersion = "1.2.9"
+def radarVersion = "1.3.6"
 dependencies {
     implementation "com.cosmos.radar:core:$radarVersion"
     implementation "com.cosmos.radar:lag:$radarVersion"
@@ -180,3 +180,4 @@ if (isOpenRadar) {
     implementation "com.cosmos.radar:empty:$radarVersion"
 }
 ```
+
