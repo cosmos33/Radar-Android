@@ -5,12 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.cosmos.radar.memory.alert.MemoryAlertKit;
 import com.cosmos.radar.memory.alert.MemoryInfo;
-import com.cosmos.radar.memory.alert.RadarMemoAlertKit;
-
-import java.util.List;
 import java.util.Queue;
-import java.util.Vector;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -38,7 +35,7 @@ public class TestMemoryAlertActivity extends Activity {
         TextView freeJava = findViewById(R.id.free_java);
         final TextView freeNative = findViewById(R.id.free_native);
 
-        MemoryInfo memoryInfo = RadarMemoAlertKit.getMemoryInfo();
+        MemoryInfo memoryInfo = MemoryAlertKit.getMemoryInfo();
         allTip.setText("maxJava: " + memoryInfo.getMaxJavaMemory() / 1048576 + "mb,  maxNative: " + memoryInfo.getMaxNativeMemory() / 1048576 + "mb");
         updateCurrentMemoryInfo(memoryInfo, currentTip);
 
@@ -51,7 +48,7 @@ public class TestMemoryAlertActivity extends Activity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    final MemoryInfo memoryInfoLocal = RadarMemoAlertKit.getMemoryInfo();
+                    final MemoryInfo memoryInfoLocal = MemoryAlertKit.getMemoryInfo();
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

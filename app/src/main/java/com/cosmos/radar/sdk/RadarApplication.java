@@ -4,10 +4,11 @@ import android.app.Application;
 
 import com.cosmos.radar.core.Radar;
 import com.cosmos.radar.core.RadarConfig;
-import com.cosmos.radar.lag.RadarLagKit;
-import com.cosmos.radar.memory.alert.RadarMemoAlertKit;
-import com.cosmos.radar.memory.leak.RadarMemoLeakKit;
-import com.cosmos.radar.pagespeed.RadarPageTimeKit;
+import com.cosmos.radar.lag.anr.ANRKit;
+import com.cosmos.radar.lag.lag.LagKit;
+import com.cosmos.radar.memory.alert.MemoryAlertKit;
+import com.cosmos.radar.memory.leak.MemoryLeakKit;
+import com.cosmos.radar.pagespeed.PageLaunchTimeKit;
 
 public class RadarApplication extends Application {
 
@@ -23,10 +24,11 @@ public class RadarApplication extends Application {
                         .appVersionCode(10000)
                         .channel("debug")
                         .kits(
-                                new RadarLagKit(),              // 卡顿
-                                new RadarPageTimeKit(),         // 页面启动时间
-                                new RadarMemoLeakKit(),         // 内存泄露
-                                new RadarMemoAlertKit()         // 内存峰值报警
+                                new ANRKit(),               // ANR
+                                new LagKit(),              // 卡顿
+                                new PageLaunchTimeKit(),         // 页面启动时间
+                                new MemoryLeakKit(),         // 内存泄露
+                                new MemoryAlertKit()         // 内存峰值报警
                         );
         Radar.with(builder.build());
     }
