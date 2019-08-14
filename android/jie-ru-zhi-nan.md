@@ -14,7 +14,7 @@ Radar支持JCenter仓库
 ### 集成依赖
 ```
 dependencies {
-    implementation "com.cosmos.radar:core:2.0.3"
+    implementation "com.cosmos.radar:core:2.1.2"
 }
 ```
 
@@ -79,7 +79,10 @@ Radar.with(builder.build());
 在初始化Radar的时候，需要通过`RadarConfig.Builder`来构建`RadarConfig`类对象，可以通过该build类的接口配置其他可选项
 
 ### debug模式设置
-打开debug模式之后，性能统计SDK在采集各项数据的时候在logcat会有日志输出
+打开debug模式之后
+
+1. 性能统计SDK在采集各项数据的时候在logcat会有日志输出
+2. 内存泄露检测发生在每个Activity退出之后5S，一旦发现内存泄漏，会立即通过通知栏提示
 
 ```
 builder.debuggable(BuildConfig.DEBUG)
@@ -197,9 +200,9 @@ Radar.putUserKeyValue("diyAttribute", "ssss");
 ```
 def isOpenRadar = true;             // 针对不同的打包方式，修改该变量
 if (isOpenRadar) {
-    implementation "com.cosmos.radar:core:2.0.3"
+    implementation "com.cosmos.radar:core:2.1.2"
 } else {
-    implementation "com.cosmos.radar:empty:2.0.1"
+    implementation "com.cosmos.radar:empty:2.1.2"
 }
 ```
 
