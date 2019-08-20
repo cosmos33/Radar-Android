@@ -51,14 +51,10 @@ android {
 
 }
 
-def radarVersion = "2.1.2"
 dependencies {
-    def isOpenRadar = true             // 针对不同的打包方式，修改该变量
-    if (isOpenRadar) {
-        implementation "com.cosmos.radar:core:$radarVersion"
-    } else {
-        implementation "com.cosmos.radar:empty:2.1.2"
-    }
+    implementation "com.cosmos.radar:core:2.2.3"
+//    debugImplementation "com.cosmos.radar:core:2.2.3"
+//    releaseImplementation "com.cosmos.radar:empty:2.1.3"
 }
 
 apply plugin: 'rifle.plugin'

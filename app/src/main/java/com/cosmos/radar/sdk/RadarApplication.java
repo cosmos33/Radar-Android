@@ -18,12 +18,13 @@ public class RadarApplication extends Application {
 
         RadarConfig.Builder builder =
                 new RadarConfig.Builder(this, "26e61d33cefc4e2cab629715b6aa260f")
-                        .debuggable(BuildConfig.DEBUG)
+                        .printDebugLog(BuildConfig.DEBUG)
+                        .analyzeLeakForeground(BuildConfig.DEBUG)
+                        .forceTurnOn(BuildConfig.DEBUG)
                         .userId(null)
                         .appVersionName("1.0.0_radar_sdk")
                         .appVersionCode(10000)
                         .channel("debug")
-                        .openWhileDebug(true)
                         .kits(
                                 new ANRKit(),               // ANR
                                 new LagKit(),              // 卡顿

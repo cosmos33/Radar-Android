@@ -14,7 +14,7 @@ Radar支持JCenter仓库
 ### 集成依赖
 ```
 dependencies {
-    implementation "com.cosmos.radar:core:2.1.2"
+    implementation "com.cosmos.radar:core:2.2.3"
 }
 ```
 
@@ -41,7 +41,7 @@ dependencies {
 ```
 buildscript {
     dependencies {
-        classpath 'com.cosmos.rifle:plugin:1.4.1'
+        classpath 'com.cosmos.rifle:plugin:1.4.2'
     }
 }
 ```
@@ -78,22 +78,44 @@ Radar.with(builder.build());
 ## 更加丰富的配置
 在初始化Radar的时候，需要通过`RadarConfig.Builder`来构建`RadarConfig`类对象，可以通过该build类的接口配置其他可选项
 
-### debug模式设置
-打开debug模式之后
-
-1. 性能统计SDK在采集各项数据的时候在logcat会有日志输出
-2. 内存泄露检测发生在每个Activity退出之后5S，一旦发现内存泄漏，会立即通过通知栏提示
+### 打开调试日志
+打开调试日志之后，性能统计SDK在采集各项数据的时候在logcat会有日志输出
 
 ```
-builder.debuggable(BuildConfig.DEBUG)
+builder.printDebugLog(BuildConfig.DEBUG)
 ```
 
-### debug模式下打开所有性能统计
-性能统计是否打开，需要通过后台放量开关进行放量配置，如果希望的debug模式下（Debug包）默认打开性能统计，可以在设置为debug模式的前提下再加一个开关配置：
+### 强制打开性能统计
+性能统计是否打开，正常是通过后台放量开关进行放量配置，如果希望强制打开性能统计，可以通过以下接口打开
+
+> ! ! ! ! 不建议线上强制打开，对性能有一定的影响! ! ! ! 
 
 ```
-builder.openWhileDebug(true)
+builder.forceTurnOn(BuildConfig.DEBUG)
 ```
+
+### 客户端内存泄露及时通知
+
+- 在客户端APP运行期间，检测内存泄露，并实时发送通知（Toast、通知栏）
+- 通过点击通知栏通知，能够进入内存泄露引用链查看界面
+
+> ! ! ! ! 不建议线上打开，影响用户使用! ! ! ! 
+
+```
+builder.analyzeLeakForeground(BuildConfig.DEBUG)
+```
+
+通知栏效果
+![analyzeLeakForeground](./images/analyzeLeakForeground.png)
+
+内存泄露引用链详情页
+![leakDetail](./images/leak_detail.png)
+
+内存泄露列表页
+![leakDetail](./images/leak_list.png)
+
+泄露历史记录桌面图标
+![leaks_icon](./images/leaks_icon.png)
 
 ### 设置版本名称
 该项为可选项，如果不设置，将会取`build.gradle`中的`versionName`对应的值，当然你可以通过以下接口进行自定义：
@@ -198,11 +220,9 @@ Radar.putUserKeyValue("diyAttribute", "ssss");
 因为`Radar` SDK 对包大小有一定的影响，如果业务在部分渠道不希望将其带上，可以通过gradle引用空库，而不需要修改代码的方式来减少对包大小的影响：
 
 ```
-def isOpenRadar = true;             // 针对不同的打包方式，修改该变量
-if (isOpenRadar) {
-    implementation "com.cosmos.radar:core:2.1.2"
-} else {
-    implementation "com.cosmos.radar:empty:2.1.2"
+dependencies {
+    debugImplementation "com.cosmos.radar:core:2.2.3"
+    releaseImplementation "com.cosmos.radar:empty:2.1.3"
 }
 ```
 
