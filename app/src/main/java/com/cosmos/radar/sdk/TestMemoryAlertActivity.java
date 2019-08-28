@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.cosmos.radar.memory.alert.MemoryAlertKit;
-import com.cosmos.radar.memory.alert.MemoryInfo;
+//import com.cosmos.radar.memory.alert.MemoryInfo;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -35,9 +35,9 @@ public class TestMemoryAlertActivity extends Activity {
         TextView freeJava = findViewById(R.id.free_java);
         final TextView freeNative = findViewById(R.id.free_native);
 
-        MemoryInfo memoryInfo = MemoryAlertKit.getMemoryInfo();
-        allTip.setText("maxJava: " + memoryInfo.getMaxJavaMemory() / 1048576 + "mb,  maxNative: " + memoryInfo.getMaxNativeMemory() / 1048576 + "mb");
-        updateCurrentMemoryInfo(memoryInfo, currentTip);
+//        MemoryInfo memoryInfo = MemoryAlertKit.getMemoryInfo();
+//        allTip.setText("maxJava: " + memoryInfo.getMaxJavaMemory() / 1048576 + "mb,  maxNative: " + memoryInfo.getMaxNativeMemory() / 1048576 + "mb");
+//        updateCurrentMemoryInfo(memoryInfo, currentTip);
 
         new Thread(new Runnable() {
             @Override
@@ -48,11 +48,11 @@ public class TestMemoryAlertActivity extends Activity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    final MemoryInfo memoryInfoLocal = MemoryAlertKit.getMemoryInfo();
+//                    final MemoryInfo memoryInfoLocal = MemoryAlertKit.getMemoryInfo();
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            updateCurrentMemoryInfo(memoryInfoLocal, currentTip);
+//                            updateCurrentMemoryInfo(memoryInfoLocal, currentTip);
                         }
                     });
                 }
@@ -82,7 +82,7 @@ public class TestMemoryAlertActivity extends Activity {
                         for (int i = 0; i < 1024 * 900; i++) {
                             objectList.poll();
                         }
-                        Runtime.getRuntime().gc();
+//                        Runtime.getRuntime().gc();
                     }
                 }).start();
             }
@@ -94,7 +94,7 @@ public class TestMemoryAlertActivity extends Activity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        mallocNativeMemory();
+//                        mallocNativeMemory();
                     }
                 }).start();
             }
@@ -106,7 +106,7 @@ public class TestMemoryAlertActivity extends Activity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        freeNativeMemory();
+//                        freeNativeMemory();
                     }
                 }).start();
             }
@@ -114,10 +114,10 @@ public class TestMemoryAlertActivity extends Activity {
 
     }
 
-    private void updateCurrentMemoryInfo(MemoryInfo memoryInfo, TextView currentTip) {
-        currentTip.setText("curJava: " + memoryInfo.getJavaMemory() / 1048576 + "mb, curNative: " + memoryInfo.getNativeMemory() / 1048576 + "mb");
-    }
+//    private void updateCurrentMemoryInfo(MemoryInfo memoryInfo, TextView currentTip) {
+//        currentTip.setText("curJava: " + memoryInfo.getJavaMemory() / 1048576 + "mb, curNative: " + memoryInfo.getNativeMemory() / 1048576 + "mb");
+//    }
 
-    private native void mallocNativeMemory();
-    private native void freeNativeMemory();
+//    private native void mallocNativeMemory();
+//    private native void freeNativeMemory();
 }
